@@ -1,18 +1,15 @@
-N, K = map(int, input().split())
+import sys
+input = sys.stdin.readline
 
-num = list(input())
-
-delK=K
-
-result = []
-
-for i in range(N):
-    while delK and result:
-        if result[-1] < num[i]:
-            result.pop()
-            delK-=1
-        else:
-            break
-    result.append(num[i])
-
-print(''.join(result[:N-K]))
+n, k = map(int, input().split())
+numbers = input().rstrip()
+stack = []
+for number in numbers:
+    while stack and stack[-1] < number and k > 0:
+        stack.pop()
+        k -= 1
+    stack.append(number)
+if k > 0:
+    print(''.join(stack[:-k]))
+else:
+    print(''.join(stack))
